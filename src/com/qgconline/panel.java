@@ -214,7 +214,7 @@ public class panel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 135, Short.MAX_VALUE))
+                .addGap(0, 133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,17 +228,18 @@ public class panel extends javax.swing.JPanel {
   try {
             String usr = user.getText();
             String psw = sandi.getText();
-            system.koneksi();
-            ResultSet rs = system.stmt.executeQuery("SELECT * FROM pemakai where KodePemakai='" + usr + "'");
+            Engine.koneksi();
+            ResultSet rs = Engine.stmt.executeQuery("SELECT * FROM pemakai where KodePemakai='" + usr + "'");
             rs.next();
             String a = rs.getString("KodePemakai");
             String b = rs.getString("KataSandi");
             if (usr.equalsIgnoreCase(a) && psw.equals(b)) {
                 Date dates = new Date();
                 SimpleDateFormat dt1 = new SimpleDateFormat("dd"+7+"-MM-yyy");
-                system.l.dispose();
-                beranda.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                beranda.setVisible(true);
+                Engine.l.dispose();
+                Beranda utama=new Beranda();
+                utama.setExtendedState(Beranda.MAXIMIZED_BOTH);
+                utama.setVisible(true);
                 masterpanel.setVisible(false);
                 
                         
@@ -247,7 +248,7 @@ public class panel extends javax.swing.JPanel {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(panel.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -263,9 +264,9 @@ public class panel extends javax.swing.JPanel {
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
         try {
-            pelanggan p=new pelanggan();
+            Pelanggan p=new Pelanggan();
             p.setVisible(true);
-            system.pelanggan();
+            Engine.pelanggan();
             System.out.print("sip");
         } catch (SQLException ex) {
             Logger.getLogger(panel.class.getName()).log(Level.SEVERE, null, ex);
@@ -274,7 +275,7 @@ public class panel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame beranda;
+    public static javax.swing.JFrame beranda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
